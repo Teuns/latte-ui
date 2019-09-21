@@ -7,9 +7,8 @@
  * LICENSE file that was distributed with this source code.
  */
 
-import anime from "../lib/animejs";
+import animejs from "animejs";
 import { getElementDimensions } from "./element";
-import { getLatte } from "../utils";
 
 export const easeSwiftOut = "cubicBezier(.55, 0, .1, 1)";
 
@@ -38,9 +37,9 @@ export function swapBlocks(options, fn)
 
 	const targetScrollTop = Math.max(0, ((firstDim.offset.top - scrollingDim.offset.top) + scrollingContainer.scrollTop + firstY) + (firstDim.dimensions.height / 2) - (scrollingDim.dimensions.height / 2));
 
-	anime({targets: firstElement, translateY: firstY, duration, easing: easeSwiftOut, loop: false});
-	anime({targets: secondElement, translateY: secondY, duration, easing: easeSwiftOut, loop: false});
-	anime({targets: scrollingContainer, scrollTop: targetScrollTop, duration, easing: easeSwiftOut, loop: false}).finished.then(() =>
+	animejs({targets: firstElement, translateY: firstY, duration, easing: easeSwiftOut, loop: false});
+	animejs({targets: secondElement, translateY: secondY, duration, easing: easeSwiftOut, loop: false});
+	animejs({targets: scrollingContainer, scrollTop: targetScrollTop, duration, easing: easeSwiftOut, loop: false}).finished.then(() =>
 	{
 		firstElement.style.removeProperty("transform");
 		secondElement.style.removeProperty("transform");

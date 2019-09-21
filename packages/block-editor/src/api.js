@@ -348,7 +348,7 @@ export class BlockEntry
 		if (updateIndices)
 			children.forEach((child, index) => child.#index = index);
 
-		this.#children = children;
+		this.#children = newChildren;
 
 		this.editor.repository.addHistory(new ChildrenUpdateOperation(this, oldChildren, newChildren));
 
