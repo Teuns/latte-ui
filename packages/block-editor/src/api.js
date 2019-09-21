@@ -6,6 +6,7 @@ import { BlockRegistry } from "./registry";
 import { getLatte } from "./utils";
 import { handleComponentError } from "./helper/error";
 import { createElement, fixHTMLString } from "./create-element";
+import { ChildrenUpdateOperation, OptionsUpdateOperation } from "./repository";
 
 let blockToFocus = undefined;
 let blocksToUpdateChildren = [];
@@ -341,10 +342,15 @@ export class BlockEntry
 		if (this.#isRemoving)
 			return;
 
-		this.#children = children;
+		const newChildren = [...children];
+		const oldChildren = [...this.#children];
 
 		if (updateIndices)
-			this.#children.forEach((child, index) => child.#index = index);
+			children.forEach((child, index) => child.#index = index);
+
+		this.#children = children;
+
+		this.editor.repository.addHistory(new ChildrenUpdateOperation(this, oldChildren, newChildren));
 
 		this.calculateHash();
 		this.updateChildren();
@@ -366,7 +372,12 @@ export class BlockEntry
 			return;
 		}
 
-		this.#options = Object.assign({}, this.#options, options);
+		const oldOptions = this.#options;
+		const newOptions = Object.assign({}, this.#options, options);
+
+		this.editor.repository.addHistory(new OptionsUpdateOperation(this, oldOptions, newOptions));
+
+		this.#options = newOptions;
 		this.calculateHash();
 		this.updateEditor();
 

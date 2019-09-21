@@ -7,11 +7,10 @@
 
 		<div class="divider divider-vertical"></div>
 		<button class="btn btn-icon btn-text btn-dark" @click="notImplemented" :data-tooltip="'View code' | beTranslate"><i class="mdi mdi-code-tags"></i></button>
-		<!--		<BEHierarchy/>-->
 
 		<div class="divider divider-vertical"></div>
-		<button class="btn btn-icon btn-text btn-dark" @click="notImplemented" :data-tooltip="'Undo' | beTranslate"><i class="mdi mdi-undo"></i></button>
-		<button class="btn btn-icon btn-text btn-dark" @click="notImplemented" :data-tooltip="'Redo' | beTranslate"><i class="mdi mdi-redo"></i></button>
+		<button class="btn btn-icon btn-text btn-dark" @click="undo" :disabled="!hasHistory" :data-tooltip="'Undo' | beTranslate"><i class="mdi mdi-undo"></i></button>
+		<button class="btn btn-icon btn-text btn-dark" @click="redo" :disabled="!hasFuture" :data-tooltip="'Redo' | beTranslate"><i class="mdi mdi-redo"></i></button>
 
 		<latte-portal-target class="d-flex align-items-center" :name="beforePortalId" multiple></latte-portal-target>
 		<slot name="before"></slot>
@@ -29,15 +28,14 @@
 <script>
 
 	import { editorInstance, getLatte, translate } from "./utils";
+
 	import BEInserterPopup from "./BEInserterPopup";
-	import BEHierarchy from "./BEHierarchy";
 
 	const L = getLatte();
 
 	export default {
 
 		components: {
-			BEHierarchy,
 			BEInserterPopup
 		},
 
@@ -50,8 +48,15 @@
 		data()
 		{
 			return {
-				editor: editorInstance(this)
+				editor: editorInstance(this),
+				hasHistory: false,
+				hasFuture: false
 			};
+		},
+
+		mounted()
+		{
+			this.editor.repository.addEventListener("repository-update", evt => this.onRepositoryUpdated(evt));
 		},
 
 		computed: {
@@ -70,6 +75,16 @@
 
 		methods: {
 
+			redo()
+			{
+				this.editor.repository.redo();
+			},
+
+			undo()
+			{
+				this.editor.repository.undo();
+			},
+
 			notImplemented()
 			{
 				L.ui.message.alert("Notice", "This feature is not yet implemented.");
@@ -80,6 +95,14 @@
 				const el = L.util.dom.closest(evt.target, ".btn").querySelector("i.mdi");
 
 				this.editor.inserter.open(el, id => this.editor.content.insertBlock(id, undefined, {}, {}, this.editor.content), -15, 12);
+			},
+
+			onRepositoryUpdated(evt)
+			{
+				const {hasHistory, hasFuture} = evt.detail;
+
+				this.hasHistory = hasHistory;
+				this.hasFuture = hasFuture;
 			}
 
 		}

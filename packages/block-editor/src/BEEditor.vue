@@ -1,6 +1,6 @@
 <template>
 
-	<div class="be-editor" spellcheck="false">
+	<div class="be-editor" tabindex="0" spellcheck="false" @keydown="onKeyDown">
 
 		<div class="be-content-pane" @click.capture="onEditorClick">
 			<BEToolbar ref="toolbar">
@@ -38,6 +38,8 @@
 
 <script>
 
+	import { convertToBlocks, convertToData } from "./api";
+	import { Repository } from "./repository";
 	import { getLatte } from "./utils";
 
 	import BEBlocks from "./BEBlocks";
@@ -47,8 +49,6 @@
 	import BEInserterPopup from "./BEInserterPopup";
 	import BESettingsPane from "./BESettingsPane";
 	import BEToolbar from "./BEToolbar";
-
-	import { convertToBlocks, convertToData } from "./api";
 
 	const L = getLatte();
 	const defaultColorPalette = [
@@ -137,6 +137,7 @@
 				updateCount: 0,
 				uniqueId: L.api.id(),
 				content: undefined,
+				repository: new Repository(),
 				selection: window.getSelection()
 			};
 		},
@@ -189,6 +190,19 @@
 				this.updateCount++;
 			},
 
+			onKeyDown(evt)
+			{
+				if ((evt.ctrlKey || evt.metaKey) && evt.key === "z")
+				{
+					if (evt.shiftKey)
+						this.repository.redo();
+					else
+						this.repository.undo();
+
+					L.util.dom.terminateEvent(evt);
+				}
+			},
+
 			onSelectionChanged()
 			{
 				/** @var {*} anchorElement */
@@ -200,9 +214,9 @@
 				this.$emit("be:selection-changed", this.selection);
 			},
 
-			onValueChanged()
+			onValueChanged(value = undefined)
 			{
-				this.content = convertToBlocks(this, this.value);
+				this.content = convertToBlocks(this, value || this.value);
 				this.$emit("be:content-ready");
 			}
 
