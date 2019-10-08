@@ -21,7 +21,7 @@
 								<latte-ripple as="button" class="btn btn-contained btn-primary btn-lg" @click="$router.push('/docs')"><i class="mdi mdi-book-open-variant"></i><span>Documentation</span></latte-ripple>
 								<latte-ripple as="a" href="//github.com/basmilius/latte-ui" target="_blank" class="btn btn-outline btn-dark btn-lg"><i class="mdi mdi-github-circle"></i><span>GitHub</span></latte-ripple>
 							</div>
-							<p class="text-muted">Version {{ $latte.version }}</p>
+							<p class="text-muted">Version {{ latteVersion }}</p>
 						</div>
 
 					</div>
@@ -102,6 +102,15 @@
 			PageHeader
 		},
 
+		computed: {
+
+			latteVersion()
+			{
+				return Latte.version;
+			}
+
+		},
+
 		methods: {
 
 			notAvailable()
@@ -127,7 +136,7 @@
 		margin: 6px 6px 0 6px;
 		padding: 120px 0;
 		background: rgba(var(--panel-background), 1);
-		border: var(--divider-size) solid rgba(var(--outline-color-secondary), 1);
+		border: 1px solid rgba(var(--outline-color), 1);
 
 		@media (max-width: 991px)
 		{
@@ -163,7 +172,7 @@
 			flex: 1 1 0;
 			flex-flow: column;
 			background: rgba(var(--panel-background), 1);
-			border: var(--divider-size) solid rgba(var(--outline-color-secondary), 1);
+			border: 1px solid rgba(var(--outline-color), 1);
 		}
 	}
 

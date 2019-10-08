@@ -12,15 +12,172 @@
 	<div class="page mb-3" id="tests">
 
 		<PageHeader>
-			<h1>Random tests</h1>
-			<p>These are some development tests.</p>
+			<h1>Bas' playground</h1>
+			<p>Here are a few things i'm working on for the next release of Latte UI :-)</p>
 		</PageHeader>
 
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
 
-					<div class="panel" v-if="true">
+					<div class="panel">
+						<div class="panel-header"><span class="panel-title">Date/time pickers</span></div>
+						<div class="panel-body">
+							<latte-datepicker></latte-datepicker>
+						</div>
+						<div class="panel-body">
+							<latte-timepicker></latte-timepicker>
+						</div>
+						<div class="panel-body">
+							<latte-datetimepicker></latte-datetimepicker>
+						</div>
+					</div>
+
+					<div class="panel">
+						<div class="panel-header"><span class="panel-title">Silhouette</span></div>
+						<div class="panel-body" style="background: rgb(var(--main-background))">
+							<div class="row">
+
+								<div class="col-12 col-lg-6">
+
+									<div class="panel">
+										<latte-silhouette class="panel-media embed-responsive embed-responsive-16by9"></latte-silhouette>
+										<div class="panel-header">
+											<latte-silhouette class="avatar avatar-36px mr-3"></latte-silhouette>
+											<div class="panel-column">
+												<latte-silhouette as="span" class="panel-title w-75"></latte-silhouette>
+												<latte-silhouette as="span" class="panel-sub-title mt-1 w-50"></latte-silhouette>
+											</div>
+										</div>
+										<div class="panel-body">
+											<latte-silhouette as="p"></latte-silhouette>
+										</div>
+										<div class="panel-footer justify-content-end">
+											<latte-silhouette as="button" class="btn btn-contained btn-primary"></latte-silhouette>
+										</div>
+									</div>
+
+								</div>
+
+								<div class="col-12 col-lg-6 mt-panel-gutter mt-lg-0">
+
+									<div class="panel">
+										<div class="panel-media embed-responsive embed-responsive-16by9" style="background-image: url(/image/wallpaper/1.jpg)"></div>
+										<div class="panel-header">
+											<latte-initials class="avatar avatar-36px mr-3" initials="BM"></latte-initials>
+											<div class="panel-column">
+												<span class="panel-title">Silhouette</span>
+												<span class="panel-sub-title">Silhouettes are amazing :-)</span>
+											</div>
+											<button class="btn btn-icon btn-text btn-dark"><i class="mdi mdi-dots-vertical"></i></button>
+										</div>
+										<div class="panel-body">
+											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid at dolores eius eligendi enim eveniet in molestiae neque nisi nostrum numquam, officiis omnis pariatur placeat, quasi qui similique vitae?</p>
+										</div>
+										<div class="panel-footer justify-content-end">
+											<button class="btn btn-contained btn-primary"><i class="mdi mdi-check-circle"></i><span>Save</span></button>
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="panel">
+						<div class="panel-header"><span class="panel-title">Form elements</span></div>
+						<div class="panel-body">
+							<div class="form-group">
+								<input type="text" placeholder="Type your name..." class="form-control"/>
+							</div>
+							<div class="form-group">
+								<input type="text" placeholder="Type your name..." class="form-control" disabled/>
+							</div>
+							<div class="form-group">
+								<select class="form-control">
+									<option value="1">This is an option</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<select class="form-control" disabled>
+									<option value="1">This is an option</option>
+								</select>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<latte-autocomplete :data-source="autocompleteDataSource" v-model="selected"></latte-autocomplete>
+							</div>
+							<div class="form-group">
+								<latte-autocomplete multi-select :data-source="autocompleteDataSource" v-model="selectedMulti"></latte-autocomplete>
+							</div>
+							<div class="form-group input-group">
+								<div class="input-group-addon"><i class="mdi mdi-tag-heart"></i></div>
+								<latte-autocomplete :data-source="autocompleteDataSource" v-model="selected"></latte-autocomplete>
+							</div>
+							<div class="form-group input-group">
+								<div class="input-group-addon"><i class="mdi mdi-tag-heart"></i></div>
+								<latte-autocomplete multi-select :data-source="autocompleteDataSource" v-model="selectedMulti"></latte-autocomplete>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="form-group input-group">
+								<div class="input-group-addon"><i class="mdi mdi-tag"></i></div>
+								<span class="badge badge-primary"><span>Awesome</span><button class="btn"><i class="mdi mdi-close"></i></button></span>
+								<span class="badge badge-primary"><span>Awesome</span><button class="btn"><i class="mdi mdi-close"></i></button></span>
+								<input type="text" placeholder="Search for tags..." class="form-control"/>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="form-group input-group">
+								<div class="input-group-addon"><input type="checkbox" class="checkbox"/></div>
+								<input type="text" placeholder="Entry code..." class="form-control"/>
+							</div>
+							<div class="form-group input-group form-control-error">
+								<div class="input-group-addon"><input type="checkbox" class="checkbox"/></div>
+								<input type="text" placeholder="Entry code..." class="form-control"/>
+							</div>
+							<div class="form-group input-group form-control-info">
+								<div class="input-group-addon"><input type="checkbox" class="checkbox"/></div>
+								<input type="text" placeholder="Entry code..." class="form-control"/>
+							</div>
+							<div class="form-group input-group form-control-success">
+								<div class="input-group-addon"><input type="checkbox" class="checkbox"/></div>
+								<input type="text" placeholder="Entry code..." class="form-control"/>
+							</div>
+							<div class="form-group input-group form-control-warning">
+								<div class="input-group-addon"><input type="checkbox" class="checkbox"/></div>
+								<input type="text" placeholder="Entry code..." class="form-control"/>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="form-group input-group">
+								<div class="input-group-addon"><i class="mdi mdi-email"></i></div>
+								<input type="text" placeholder="E-mailaddress..." class="form-control"/>
+							</div>
+							<div class="form-group input-group">
+								<input type="text" placeholder="E-mailaddress..." class="form-control"/>
+								<div class="input-group-addon"><i class="mdi mdi-email"></i></div>
+							</div>
+							<div class="form-group input-group">
+								<div class="input-group-addon"><i class="mdi mdi-email"></i></div>
+								<input type="text" placeholder="E-mailaddress..." class="form-control"/>
+								<button class="btn btn-contained btn-primary"><span>Save</span></button>
+							</div>
+							<div class="form-group input-group">
+								<div class="input-group-addon"><i class="mdi mdi-email"></i></div>
+								<input type="text" placeholder="E-mailaddress..." class="form-control"/>
+								<div class="input-group-addon"><i class="mdi mdi-check-circle"></i></div>
+							</div>
+							<div class="form-group input-group">
+								<div class="input-group-addon">https://example.com/profile/</div>
+								<input type="text" placeholder="Choose an username..." class="form-control"/>
+							</div>
+						</div>
+					</div>
+
+					<div class="panel" v-if="false">
 						<div class="panel-header"><span class="panel-title">Virtual scroller</span></div>
 						<latte-virtual-scroller :items="rows" :item-height="48" style="height: 390px">
 
@@ -31,7 +188,7 @@
 						</latte-virtual-scroller>
 					</div>
 
-					<div class="panel" v-if="true">
+					<div class="panel" v-if="false">
 						<div class="panel-header"><span class="panel-title">Virtual scroller (grid)</span></div>
 						<latte-virtual-scroller :items="rows" :item-height="48" :item-width="222" items-class="d-flex flex-row flex-wrap" style="height: 390px">
 
@@ -66,8 +223,34 @@
 			let rows = Array.from(Array(10000), () => ({id: ++i, name: `Bas ${i}`}));
 
 			return {
-				rows: rows
+				rows: rows,
+				selected: 0,
+				selectedMulti: []
 			};
+		},
+
+		methods: {
+
+			autocompleteDataSource()
+			{
+				let items = [];
+
+				for (let i = 0; i < 100; i++)
+					items.push({value: i + 1, label: `Item ${i + 1}`});
+
+				return {
+					getEntries(ids)
+					{
+						return new Promise(resolve => resolve(items.filter(item => ids.indexOf(item.value) > -1)));
+					},
+
+					getSuggestions(query, offset, limit)
+					{
+						return new Promise(resolve => resolve(items.filter(item => item.label.indexOf(query) === 0).slice(offset, limit)));
+					}
+				};
+			}
+
 		}
 
 	}

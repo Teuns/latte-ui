@@ -179,6 +179,26 @@ const router = new Router({
 			]
 		},
 		{
+			path: "/examples",
+			component: () => import("./components/NestedRouterView.vue"),
+			children: [
+				{
+					path: "news",
+					component: () => import("./views/examples/news/App.vue"),
+					children: [
+						{
+							path: "",
+							component: () => import("./views/examples/news/Frontpage.vue")
+						}
+					]
+				},
+				{
+					path: "scaffolding",
+					component: () => import("./views/examples/scaffolding/App.vue")
+				}
+			]
+		},
+		{
 			path: "*",
 			component: () => import("./views/NotFound.vue")
 		}

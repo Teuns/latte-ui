@@ -17,15 +17,16 @@
 {
 	position: relative;
 	display: inline-block;
+	appearance: none;
+	margin: 0;
 	height: 24px;
 	width: 36px;
-	appearance: none;
 	flex: 0 0 auto;
-	border: 2px solid #{latte-rgb(var(--form-field-outline))};
+	border: 2px solid #{latte-rgb(var(--form-outline))};
 	border-radius: 12px;
 	cursor: pointer;
-	outline: none;
-	transition: 240ms var(--ease-swift-out);
+	outline: 0;
+	transition: 180ms var(--ease-swift-out);
 	transition-property: background, border-color;
 	vertical-align: middle;
 
@@ -36,9 +37,8 @@
 		margin: 4px;
 		width: 12px;
 		content: "";
-		background: #{latte-rgb(var(--form-field-outline))};
-		border-radius: 7px;
-		transform: translate3d(0, 0, 0);
+		background: #{latte-rgb(var(--form-outline))};
+		border-radius: inherit;
 		transition: inherit;
 		transition-property: background, transform;
 	}
@@ -65,7 +65,6 @@
 		cursor: not-allowed;
 		filter: grayscale(100%);
 		opacity: .5;
-		pointer-events: none;
 	}
 }
 
