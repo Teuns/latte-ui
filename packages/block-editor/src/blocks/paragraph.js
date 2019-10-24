@@ -1,5 +1,5 @@
 import { BlockBase } from "../block";
-import { optionAdditionalClasses, optionTextColor, optionTextSize } from "../primitive/element";
+import { optionTextColor, optionTextSize } from "../primitive/element";
 import { render, renderEditor, renderTextFormatToolbar } from "../primitive/text";
 import { blockActions, settingsGroup } from "../primitive/settings";
 
@@ -53,8 +53,7 @@ export class ParagraphBlock extends BlockBase
 			blockActions(h, entry),
 			renderTextFormatToolbar(h, entry),
 			optionTextColor(h, entry),
-			optionTextSize(h, entry),
-			optionAdditionalClasses(h, entry)
+			optionTextSize(h, entry)
 		]);
 	}
 
